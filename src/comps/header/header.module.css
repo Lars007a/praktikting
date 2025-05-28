@@ -1,0 +1,117 @@
+.header {
+  width: 100%;
+  height: 70vh;
+
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  .con {
+    width: 50%;
+    width: 750px;
+  }
+
+  .searchBox {
+    background-color: var(--mainbc);
+    padding: 15px 25px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0.3);
+    color: var(--textColor);
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+
+    border-radius: 25px;
+
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  .searchBox .smallgray {
+    height: 1px;
+    background-color: var(--mutedText);
+    width: 100%;
+  }
+
+  .searchBox h2 {
+  }
+
+  .searchBox form {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+  }
+
+  .searchBox input[type="text"],
+  select {
+    background-color: var(--secColor);
+    color: var(--textColor);
+    border: 0;
+    outline: none;
+    padding: 8px 12px;
+    border-radius: 10px;
+    border: 1px solid transparent;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
+    transition: border 0.2s, background-color 0.2s;
+    font-size: 16px;
+  }
+
+  .searchBox select {
+    appearance: none;
+    cursor: pointer;
+    background-color: var(--accentColor);
+  }
+
+  .searchBox select:hover {
+    background-color: var(--accentHover);
+  }
+
+  .searchBox input::placeholder {
+    color: var(--textColor);
+  }
+
+  .searchBox option:disabled {
+    color: var(--mutedText);
+  }
+
+  .searchBox input[type="text"]:focus {
+    /*     border: 1px solid var(--accentColor);
+ */
+    background-color: var(--mutedText);
+  }
+
+  .notFrontpageText {
+    text-align: center;
+    color: var(--textColor);
+  }
+}
+
+@media (max-width: 1300px) {
+  .header .con {
+    width: 600px;
+  }
+}
+
+@media (max-width: 700px) {
+  .header .con {
+    width: 90%;
+  }
+
+  .header .con .searchBox {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .header .con .searchBox form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+}
