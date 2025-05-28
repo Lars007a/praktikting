@@ -1,16 +1,21 @@
 import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
-import "./App.css";
+import { useRoutes } from "react-router";
+import Frontpage from "./pages/frontpage/frontpage";
+import Singlepost from "./pages/singlePost/singlePost.jsx";
 
 function App() {
-  const [count, setCount] = useState(0);
+  const routes = useRoutes([
+    {
+      path: "/",
+      element: <Frontpage />,
+    },
+    {
+      path: "/post/:postid",
+      element: <Singlepost />,
+    },
+  ]);
 
-  return (
-    <>
-      <p>Hej</p>
-    </>
-  );
+  return <>{routes}</>;
 }
 
 export default App;
