@@ -1,0 +1,7 @@
+.pageSec {
+  background-color: var(--mainbc);
+  padding: 30px 0px;
+
+  .content {
+  }
+}

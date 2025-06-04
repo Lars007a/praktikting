@@ -1,0 +1,64 @@
+.footer {
+  background-color: var(--mainbc);
+  border-top: 1px solid var(--secColor);
+  padding: 30px 0px;
+
+  .content {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .content div {
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+  }
+
+  .linkSec {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    list-style-type: none;
+  }
+
+  .linkSec h3 {
+    font-weight: 500;
+  }
+
+  .linkSec a {
+    transition: color 0.2s;
+  }
+
+  .linkSec a:hover {
+    color: var(--accentColor);
+  }
+
+  .linkSec span {
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+  }
+
+  .linkSec span svg {
+    color: var(--accentColor);
+    height: 22px;
+    width: auto;
+  }
+
+  h3,
+  a,
+  p {
+    color: var(--textColor);
+  }
+
+  p,
+  a {
+    font-size: 16px;
+  }
+
+  h3 {
+    font-size: 25px;
+  }
+}

@@ -25,7 +25,8 @@ body {
   font-family: "Quicksand", sans-serif;
 }
 
-p {
+p,
+a {
   font-weight: 400;
   font-size: 18px;
 }
@@ -62,6 +63,10 @@ h5 {
 
 h6 {
   font-size: 18px;
+}
+
+a {
+  text-decoration: none;
 }
 
 .container {

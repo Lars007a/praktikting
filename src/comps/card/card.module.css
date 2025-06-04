@@ -1,0 +1,107 @@
+.card {
+  background-color: transparent;
+  border-radius: 12px;
+  border: 1px solid var(--secColor);
+  background-color: var(--mainbc);
+
+  p,
+  a,
+  span,
+  strong,
+  h1,
+  h2,
+  h3,
+  svg,
+  button {
+    color: var(--textColor);
+  }
+
+  img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 12px 12px 0px 0px;
+  }
+
+  .content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+  }
+
+  .top {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .btns {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+  }
+
+  .btns button {
+    flex: 1;
+    font-size: 18px;
+    padding: 12px 20px;
+    border-radius: 060504px;
+
+    cursor: pointer;
+
+    border: 0px;
+    outline: none;
+
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .btns button svg {
+    height: 18px;
+    width: auto;
+  }
+
+  .btns button:nth-child(1) {
+    background-color: var(--accentColor);
+  }
+
+  .btns button:nth-child(2) {
+    background-color: red;
+  }
+
+  .cat {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 20px;
+
+    flex-wrap: wrap;
+  }
+
+  .cat p {
+    padding: 8px 14px;
+    background-color: var(--mutedText);
+    border-radius: 15px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
+  }
+}
+
+.card.nottransparrent {
+  background-color: var(--secColor);
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.3);
+  border: 0px;
+}
+
+@media (max-width: 500px) {
+  .card .content .btns {
+    flex-direction: column;
+  }
+}
