@@ -9,3 +9,7 @@
 .title {
   margin: 20px 0px;
 }
+
+.nocomment {
+  color: var(--textColor);
+}

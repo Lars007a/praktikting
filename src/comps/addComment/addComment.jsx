@@ -5,8 +5,12 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { toast } from "react-toastify";
+import ErrorBox from "../errorBox/errorBox.jsx";
+import { useSendData } from "../../hooks/usePosts.jsx";
 
-export default function addComment() {
+export default function addComment({ postid, updateFunc }) {
+  const sendDataObj = useSendData();
+
   const schema = yup.object({
     email: yup
       .string()
@@ -24,14 +28,33 @@ export default function addComment() {
 
   const onSubmit = (data) => {
     console.log(data);
+    let d = sendDataObj
+      .addComment(postid, data.email, data.name, data.text)
+      .then((val) => {
+        if (val.status == "ok") {
+          toast.success("Kommentar tilføjet!");
+          updateFunc();
+        } else {
+          console.log(val);
+          throw new Error(val.message);
+        }
+      })
+      .catch((error) => {
+        toast.error(error.message);
+      });
+    console.log(d);
   };
 
   return (
     <>
+      <div className={styles.title}>
+        <Title title={"Tilføj kommentar"} />
+      </div>
       <form
         className={styles.form}
         onSubmit={handleSubmit(onSubmit)}
         noValidate
+        id="commentsection"
       >
         <input type="email" placeholder="Email..." {...register("email")} />
         <input type="text" placeholder="Navn..." {...register("name")} />
@@ -43,23 +66,11 @@ export default function addComment() {
         <input type="submit" value={"Send kommentar"} />
       </form>
       <div className={styles.errorOutput}>
-        {errors.email && (
-          <div>
-            <p>{errors.email.message}</p>
-          </div>
-        )}
+        {errors.email && <ErrorBox msg={errors.email.message} />}
 
-        {errors.name && (
-          <div>
-            <p>{errors.name.message}</p>
-          </div>
-        )}
+        {errors.name && <ErrorBox msg={errors.name.message} />}
 
-        {errors.text && (
-          <div>
-            <p>{errors.text.message}</p>
-          </div>
-        )}
+        {errors.text && <ErrorBox msg={errors.text.message} />}
       </div>
     </>
   );

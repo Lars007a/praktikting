@@ -15,6 +15,10 @@
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   /*   background-color: var(--mainbc);
  */
@@ -86,6 +90,17 @@ a {
 .title {
   font-family: "Merienda", cursive;
   font-weight: 500;
+}
+
+div.swiper-button-prev,
+div.swiper-button-next {
+  color: var(--accentColor);
+  transition: color 0.2s;
+}
+
+div.swiper-button-prev:hover,
+div.swiper-button-next:hover {
+  color: var(--accentHover);
 }
 
 @media (max-width: 1000px) {

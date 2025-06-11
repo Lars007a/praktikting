@@ -4,55 +4,51 @@ import testpic from "../../assets/testpic.jpg";
 import Card from "../../comps/card/card.jsx";
 import { useParams } from "react-router";
 import CommentGrid from "../../comps/commentGrid/commentGrid.jsx";
+import { useGetData } from "../../hooks/usePosts.jsx";
+import LoadingSpinner from "../../comps/loadingSpinner/loadingSpinner.jsx";
+import ErrorBox from "../../comps/errorBox/errorBox.jsx";
+import AddComment from "../../comps/addComment/addComment.jsx";
+import Title from "../../comps/titleWithLine/titleWithLine.jsx";
+import { useEffect } from "react";
 
-export default function singlePost() {
+export default function SinglePost() {
   let params = useParams();
+  const postObj = useGetData(`post/${params.postid}`);
 
-  console.log(params, params.postid);
+  console.log(postObj.data);
 
   return (
     <>
-      <Header img={testpic} frontpage={false} title="Ting ting" />
+      <Header
+        img={postObj.data ? postObj.data.img[0] : testpic}
+        frontpage={false}
+        title={postObj.data ? postObj.data.title : "title"}
+      />
+
       <section className={styels.pageSec}>
         <div className="container">
           <div className={styels.content}>
-            <Card
-              title={"Indlæg 1"}
-              likes={10}
-              comments={11}
-              date={"1. Maj"}
-              category={["Hej", "Ting2", "blabla", "sådan!"]}
-              text={
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-              }
-              changeBcColor={false}
-              fullPostPage={true}
-            />
-
-            <CommentGrid
-              comments={[
-                {
-                  name: "Navn 1",
-                  date: "1. Maj",
-                  text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-                },
-                {
-                  name: "Navn 2",
-                  date: "2. Maj",
-                  text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-                },
-                {
-                  name: "Navn 3",
-                  date: "3. Maj",
-                  text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-                },
-                {
-                  name: "Navn 3",
-                  date: "3. Maj",
-                  text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-                },
-              ]}
-            />
+            {postObj.error && <ErrorBox msg={postObj?.error} />}
+            {postObj.loading && <LoadingSpinner />}
+            {postObj.data && (
+              <>
+                <Card
+                  obj={postObj?.data}
+                  fullPostPage={true}
+                  updateFunc={postObj?.get}
+                  changeBcColor={false}
+                />
+                <AddComment
+                  postid={postObj?.data?._id}
+                  updateFunc={postObj?.get}
+                />
+                <CommentGrid
+                  comments={postObj?.data.comments}
+                  postid={postObj.data._id}
+                  updateFunc={postObj?.get}
+                />
+              </>
+            )}
           </div>
         </div>
       </section>

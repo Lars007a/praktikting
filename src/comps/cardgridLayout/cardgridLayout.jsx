@@ -1,71 +1,85 @@
 import styles from "./cardgridLayout.module.css";
 import Title from "../titleWithLine/titleWithLine.jsx";
 import Card from "../card/card.jsx";
+import { useGetData } from "../../hooks/usePosts.jsx";
+import LoadingSpinner from "../loadingSpinner/loadingSpinner.jsx";
+import ErrorBox from "../errorBox/errorBox.jsx";
+import { useEffect, useState } from "react";
+import ReactPaginate from "react-paginate";
+import { MdNavigateNext } from "react-icons/md";
+import { MdNavigateBefore } from "react-icons/md";
+import Searchbox from "../searchbox/searchbox.jsx";
 
 export default function cardgrid() {
+  const postObj = useGetData(`posts`);
+
+  //Arbejder ud fra denne, fordi eventuelle søgeresultater ville være i denne array.
+  const [filteredArray, setFilteredArray] = useState([]); //Array der holder alle dem der matcher filteret, såsom søgning, kategori, likes, osv, osv.
+
+  const postPerPage = 10; //Hvor mange der skal vises på siden.
+  const [currentPage, setCurrentPage] = useState(0); //Nuværende side.
+
+  const handleClick = ({ selected }) => {
+    setCurrentPage(selected);
+    window.scrollTo({ top: 0, behaviour: "smooth" });
+  }; //Bare ændre den nuværende side, og scroller til toppen med en smooth transition.
+
+  useEffect(() => {
+    //Sætter filteredarray, når postObj.data kommer ind, og bliver loadet.
+    if (postObj.data) {
+      setFilteredArray(postObj.data);
+    }
+  }, [postObj.data]);
+
+  const posts = filteredArray.slice(
+    currentPage * postPerPage, //få offset, 0 * 10 = 0, 1 * 10 = 10, 2 * 10 = 20,
+    (currentPage + 1) * postPerPage //få hvor meget den skal op til, så 0+1 * 10 = 10, 1+1 * 10 = 20, 1+2 * 10 = 30, 1+3 * 10 = 40.
+  ); //array, der holder dem der skal vises på den nuværende side.
+
   return (
     <section className={styles.cardgrid}>
       <div className="container">
         <div className={styles.content}>
+          {console.log("før", filteredArray)}
+          <Searchbox data={filteredArray} setData={setFilteredArray} />
+
           <Title title={"Blog indlæg"} />
 
+          {postObj.loading && (
+            <div className={styles.box}>
+              <LoadingSpinner />
+            </div>
+          )}
+          {postObj.error && (
+            <div className={styles.box}>
+              <ErrorBox msg={postObj.error} />
+            </div>
+          )}
           <div className={styles.grid}>
-            <Card
-              title={"Indlæg 1"}
-              likes={10}
-              comments={11}
-              date={"1. Maj"}
-              category={["Hej", "Ting2", "blabla", "sådan!"]}
-              text={
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-              }
-              changeBcColor={false}
-            />
-            <Card
-              title={"Indlæg 1"}
-              likes={10}
-              comments={11}
-              date={"1. Maj"}
-              category={["Hej", "Ting2", "blabla", "sådan!"]}
-              text={
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-              }
-              changeBcColor={true}
-            />
-            <Card
-              title={"Indlæg 1"}
-              likes={10}
-              comments={11}
-              date={"1. Maj"}
-              category={["Hej", "Ting2", "blabla", "sådan!"]}
-              text={
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-              }
-              changeBcColor={true}
-            />
-            <Card
-              title={"Indlæg 1"}
-              likes={10}
-              comments={11}
-              date={"1. Maj"}
-              category={["Hej", "Ting2", "blabla", "sådan!"]}
-              text={
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-              }
-              changeBcColor={true}
-            />
-            <Card
-              title={"Indlæg 1"}
-              likes={10}
-              comments={11}
-              date={"1. Maj"}
-              category={["Hej", "Ting2", "blabla", "sådan!"]}
-              text={
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-              }
-              changeBcColor={true}
-            />
+            {postObj.data && (
+              <>
+                {posts.map((element) => {
+                  return (
+                    <Card
+                      obj={element}
+                      key={element._id}
+                      updateFunc={postObj.get}
+                    />
+                  );
+                })}
+              </>
+            )}
           </div>
+          {
+            <ReactPaginate
+              previousLabel={<MdNavigateBefore />}
+              nextLabel={<MdNavigateNext />}
+              pageCount={Math.ceil((filteredArray?.length || 0) / postPerPage)}
+              onPageChange={handleClick}
+              containerClassName={styles.pagination}
+              activeClassName={styles.active}
+            />
+          }
         </div>
       </div>
     </section>

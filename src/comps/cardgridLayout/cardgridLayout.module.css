@@ -8,12 +8,51 @@
     width: 100%;
   }
 
+  .box {
+    margin-top: 25px;
+  }
+
   .grid {
     margin-top: 25px;
 
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 20px;
+  }
+
+  .pagination {
+    list-style-type: none;
+    display: flex;
+    flex-direction: row;
+
+    justify-content: center;
+    align-items: center;
+    padding: 25px 0px 5px 0px;
+    gap: 12px;
+
+    li {
+      color: var(--textColor);
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      transition: color 0.2s;
+      cursor: pointer;
+      font-size: 20px;
+    }
+
+    li:hover {
+      color: var(--accentColor);
+    }
+
+    li svg {
+      height: 22px;
+      width: auto;
+    }
+  }
+
+  .active {
+    color: var(--mutedText) !important;
   }
 }
 
