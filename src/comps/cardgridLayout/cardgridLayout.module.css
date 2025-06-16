@@ -54,6 +54,11 @@
   .active {
     color: var(--mutedText) !important;
   }
+
+  .notfound {
+    color: var(--textColor);
+    text-align: center;
+  }
 }
 
 @media (max-width: 1000px) {

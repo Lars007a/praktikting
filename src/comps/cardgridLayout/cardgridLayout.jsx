@@ -40,8 +40,7 @@ export default function cardgrid() {
     <section className={styles.cardgrid}>
       <div className="container">
         <div className={styles.content}>
-          {console.log("før", filteredArray)}
-          <Searchbox data={filteredArray} setData={setFilteredArray} />
+          <Searchbox setData={setFilteredArray} allData={postObj.data} />
 
           <Title title={"Blog indlæg"} />
 
@@ -58,15 +57,19 @@ export default function cardgrid() {
           <div className={styles.grid}>
             {postObj.data && (
               <>
-                {posts.map((element) => {
-                  return (
-                    <Card
-                      obj={element}
-                      key={element._id}
-                      updateFunc={postObj.get}
-                    />
-                  );
-                })}
+                {posts.length > 0 ? (
+                  posts.map((element) => {
+                    return (
+                      <Card
+                        obj={element}
+                        key={element._id}
+                        updateFunc={postObj.get}
+                      />
+                    );
+                  })
+                ) : (
+                  <p className={styles.notfound}>Ingen posts/indlæg!</p>
+                )}
               </>
             )}
           </div>

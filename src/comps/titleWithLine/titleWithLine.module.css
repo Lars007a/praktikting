@@ -16,3 +16,9 @@
   flex: 1;
   background-color: var(--secColor);
 }
+
+.black {
+  h2 {
+    color: var(--mainbc);
+  }
+}

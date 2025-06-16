@@ -5,6 +5,7 @@ import SinglePost from "./pages/singlePost/singlePost.jsx";
 import Nav from "./comps/nav/nav.jsx";
 import Footer from "./comps/footer/footer.jsx";
 import { ToastContainer } from "react-toastify";
+import Backoffice from "./pages/backoffice/backoffice.jsx";
 
 export default function App() {
   const routes = useRoutes([
@@ -15,6 +16,10 @@ export default function App() {
     {
       path: "/post/:postid",
       element: <SinglePost />,
+    },
+    {
+      path: "/backoffice",
+      element: <Backoffice />,
     },
   ]);
 

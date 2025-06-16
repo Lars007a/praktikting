@@ -1,5 +1,5 @@
 import styles from "./card.module.css";
-import testpic from "../../assets/testpic.jpg";
+import stdpic from "../../assets/standard.jpg";
 import { FaHeart } from "react-icons/fa";
 import { IoIosHeartDislike } from "react-icons/io";
 import { FaComment } from "react-icons/fa";

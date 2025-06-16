@@ -9,6 +9,7 @@ lerna-debug.log*
 
 #mine:
 ting.txt
+dynamic.txt
 
 node_modules
 dist

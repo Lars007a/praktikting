@@ -1,6 +1,5 @@
 import styels from "./singlePost.module.css";
 import Header from "../../comps/header/header";
-import testpic from "../../assets/testpic.jpg";
 import Card from "../../comps/card/card.jsx";
 import { useParams } from "react-router";
 import CommentGrid from "../../comps/commentGrid/commentGrid.jsx";
@@ -9,6 +8,7 @@ import LoadingSpinner from "../../comps/loadingSpinner/loadingSpinner.jsx";
 import ErrorBox from "../../comps/errorBox/errorBox.jsx";
 import AddComment from "../../comps/addComment/addComment.jsx";
 import Title from "../../comps/titleWithLine/titleWithLine.jsx";
+import standardpic from "../../assets/standard.jpg";
 import { useEffect } from "react";
 
 export default function SinglePost() {
@@ -20,7 +20,9 @@ export default function SinglePost() {
   return (
     <>
       <Header
-        img={postObj.data ? postObj.data.img[0] : testpic}
+        img={
+          postObj?.data?.img?.length > 0 ? postObj?.data?.img : [standardpic]
+        }
         frontpage={false}
         title={postObj.data ? postObj.data.title : "title"}
       />

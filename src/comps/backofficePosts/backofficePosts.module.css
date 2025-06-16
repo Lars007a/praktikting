@@ -1,0 +1,60 @@
+.tablecon {
+  table {
+    width: 100%;
+    border-collapse: collapse; /* så der ikke er et lille mellemrum */
+  }
+
+  table img {
+    height: 50px;
+    width: auto;
+    object-fit: cover;
+  }
+
+  table thead {
+    background-color: var(--mainGreen);
+    color: var(--white);
+  }
+
+  th,
+  td {
+    padding: 8px 5px;
+    text-align: left;
+  }
+
+  tbody th,
+  tbody td {
+    border: 1px solid #ccc;
+  }
+
+  tbody svg {
+    height: 18px;
+    width: auto;
+    color: darkslategrey;
+    cursor: pointer;
+  }
+
+  tbody svg:hover {
+    color: rgb(7, 17, 17);
+  }
+
+  tbody tr:nth-child(even) {
+    background-color: var(--offWhite);
+  }
+}
+
+.btn {
+  cursor: pointer;
+  background-color: var(--secColor);
+
+  border: 0;
+  outline: none;
+  border-radius: 8px;
+  text-align: center;
+  color: var(--textColor);
+
+  padding: 8px 12px;
+}
+
+.colorchange {
+  background-color: var(--secColor) !important;
+}

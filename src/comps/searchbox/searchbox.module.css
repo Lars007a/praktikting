@@ -1,11 +1,16 @@
 .con {
   width: 750px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 5px 0px 20px 0px;
 }
 
 .searchBox {
   background-color: var(--mainbc);
-  padding: 15px 25px;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0.3);
+  padding: 25px 35px;
+  /*   box-shadow: 0px 2px 4px rgba(0, 0, 0.3);
+ */
+  border: 1px solid var(--secColor);
   color: var(--textColor);
 
   display: flex;
@@ -43,8 +48,14 @@
 }
 
 .searchBox form .inputsform input,
-.searchBox form .inputsform select {
+.searchBox form .inputsform opts {
   flex: 1;
+}
+
+.searchBox form .inputsform .opts {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
 }
 
 .searchBox input[type="text"],
@@ -70,6 +81,7 @@ select {
   border-radius: 10px;
   cursor: pointer;
   transition: background-color 0.2s;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0.3);
 }
 
 .searchBtn:hover {
@@ -116,9 +128,13 @@ select {
     flex-direction: column;
   }
 
-  .con .searchBox form {
+  .con .searchBox form .inputsform {
     display: flex;
     flex-direction: column;
     width: 100%;
+  }
+
+  .con .searchBox form .inputsform .opts {
+    flex-direction: column;
   }
 }

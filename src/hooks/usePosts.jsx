@@ -73,9 +73,23 @@ export function useSendData() {
     });
   }
 
-  function addPost(form) {}
+  function addPost(form) {
+    return fetch(`http://localhost:3043/posts/`, {
+      method: "POST",
+      body: form,
+    }).then((res) => {
+      return res.json(); //return promsie med json value til næste.
+    });
+  }
 
-  function updatePost(form) {}
+  function updatePost(form, postid) {
+    return fetch(`http://localhost:3043/updatePost/${postid}`, {
+      method: "PUT",
+      body: form,
+    }).then((res) => {
+      return res.json(); //return promsie med json value til næste.
+    });
+  }
 
   function deleteComment(postid, commentid) {}
 
@@ -83,5 +97,5 @@ export function useSendData() {
 
   function sendRating(rating) {}
 
-  return { addLike, addComment };
+  return { addLike, addComment, addPost, updatePost };
 }
