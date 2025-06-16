@@ -3,7 +3,7 @@ import styles from "./backofficeEditPost.module.css";
 import { useSendData } from "../../hooks/usePosts.jsx";
 import { toast } from "react-toastify";
 
-export default function backofficeEditPost({ obj }) {
+export default function backofficeEditPost({ obj, updateFunc }) {
   const useSend = useSendData();
 
   const formRef = useRef(null);
@@ -22,6 +22,7 @@ export default function backofficeEditPost({ obj }) {
       .then((val) => {
         if (val.status == "ok") {
           toast.success(val.message);
+          updateFunc();
         } else {
           throw new Error(val.message);
         }
@@ -37,19 +38,26 @@ export default function backofficeEditPost({ obj }) {
         type="text"
         name="title"
         placeholder="Titel..."
+        className="stdInput"
         defaultValue={obj.title}
       />
-      <textarea name="text" placeholder="Tekst..." defaultValue={obj.text} />
+      <textarea
+        name="text"
+        placeholder="Tekst..."
+        defaultValue={obj.text}
+        className="stdInput"
+      />
       <input
         type="text"
         name="category"
         placeholder="Kategorier..."
+        className="stdInput"
         defaultValue={obj.category.toString()}
       />
       <div>
         <input type="file" name="image" id="image" multiple />
       </div>
-      <input type="submit" value={"Send"} />
+      <input type="submit" value={"Send"} className="stdInputBtn" />
     </form>
   );
 }

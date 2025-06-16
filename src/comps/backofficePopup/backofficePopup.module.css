@@ -28,15 +28,15 @@
 
     width: 100%;
 
-    background-color: var(--mainbc);
+    background-color: var(--accentColor);
 
-    color: var(--textColor);
+    color: var(--btnText);
 
     padding: 8px 12px;
   }
 
   .top svg {
-    color: var(--textColor);
+    color: var(--btnText);
     height: 22px;
     width: auto;
     cursor: pointer;
@@ -48,6 +48,9 @@
 
     background-color: var(--textColor);
     color: var(--mainbc);
+
+    background-color: var(--mainbc);
+    color: var(--textColor);
 
     padding: 15px 12px;
   }

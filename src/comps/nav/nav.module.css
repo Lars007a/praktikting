@@ -34,16 +34,30 @@
     list-style-type: none;
   }
 
-  ul a {
+  ul a,
+  ul li {
     text-decoration: none;
     color: var(--textColor);
     transition: color 0.2s;
   }
 
-  ul a:hover {
+  ul a:hover,
+  ul svg:hover {
     color: var(--accentColor);
   }
 
-  ul a li {
+  ul li {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+
+  ul svg {
+    height: 22px;
+    width: auto;
+    color: var(--textColor);
+    transition: color 0.2s;
+    cursor: pointer;
   }
 }

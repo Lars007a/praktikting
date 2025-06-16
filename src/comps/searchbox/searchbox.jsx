@@ -3,25 +3,26 @@ import Title from "../titleWithLine/titleWithLine";
 import { useEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";
 
-export default function searchbox({ setData, allData = [] }) {
-  const [categories, setCategories] = useState([]);
+export default function searchbox({ setData, allData = [], changePage }) {
+  const [categories, setCategories] = useState([]); //Alle kategorier der kan vælges immellem.
 
   useEffect(() => {
-    console.log("Kom ind!");
+    if (allData == undefined || allData == null) return; //Hvis vi ikke har dataene endnu.
 
-    if (allData == undefined || allData == null) return;
-
-    let tempArray = [];
+    let tempArray = []; //Array til at holde på kategorierne midlertidligt.
 
     for (let i = 0; i < allData.length; i++) {
+      //Loop over dataene vi har fået.
       if (allData[i].category == null || allData[i].category == undefined)
-        continue;
+        continue; //Hvis vi ikke har en category, stop dette iteration af loppet, og gå videre til næste.
 
       for (let y = 0; y < allData[i].category.length; y++) {
+        //Hvis vi har category, så loop over alle elementer i category, (for hvert element i data arrayen.)
         if (tempArray.includes(allData[i].category[y])) {
+          //Hvis temparrayen allerede har denne kategori i sig, så gå videre til næste iteration af loopet.
           continue;
         }
-        tempArray.push(allData[i].category[y]);
+        tempArray.push(allData[i].category[y]); //Ellers så tilføj kategorien.
       }
     }
     //Kun opdater hvis den har ændrede sig.
@@ -47,7 +48,7 @@ export default function searchbox({ setData, allData = [] }) {
       return;
     }
 
-    //tag filteredarray, og filter den baseret på fulde array, som vi også skal have ind som et prop...
+    //tag filteredarray, og sæt den baseret på den fulde array, og de elementer deri, der passer til søgekriterierne.
     const newArray = allData.filter((element, index) => {
       if (
         element.title.toLowerCase().includes(searchTerm) &&
@@ -65,7 +66,7 @@ export default function searchbox({ setData, allData = [] }) {
       return false;
     });
 
-    //Sort array.
+    //Sort array ifølge søgekriterierne.
 
     if (orderEl == "alph") {
       newArray.sort((a, b) => {
@@ -97,7 +98,9 @@ export default function searchbox({ setData, allData = [] }) {
 
     console.log(newArray.length);
 
+    //Sæt arrayen til den state variable i parrent component.
     setData(newArray);
+    changePage(0);
   };
 
   return (
@@ -111,6 +114,7 @@ export default function searchbox({ setData, allData = [] }) {
               placeholder="Søg..."
               name="search"
               ref={searchRef}
+              className="stdInput"
             />
             <div className={styles.opts}>
               <select name="category" defaultValue={"choose"} ref={selectRef}>
@@ -138,7 +142,7 @@ export default function searchbox({ setData, allData = [] }) {
             </div>
           </div>
           <div className={styles.smallgray}></div>
-          <input type="submit" className={styles.searchBtn} value={"Søg"} />
+          <input type="submit" className="stdInputBtn" value={"Søg"} />
         </form>
       </div>
     </div>

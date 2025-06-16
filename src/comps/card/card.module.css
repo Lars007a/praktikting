@@ -17,6 +17,12 @@
     color: var(--textColor);
   }
 
+  button,
+  input,
+  svg {
+    color: var(--btnText);
+  }
+
   .cardLink {
     color: var(--mutedText);
     transition: color 0.2s;
@@ -90,6 +96,8 @@
     justify-content: center;
     align-items: center;
     gap: 8px;
+
+    transition: background-color 0.2s;
   }
 
   .btns button svg .btns a svg {
@@ -101,8 +109,13 @@
     background-color: var(--accentColor);
   }
 
+  .btns button:hover {
+    background-color: var(--accentHover);
+  }
+
   .btns a {
     background-color: red;
+    color: var(--btnText);
   }
 
   .cat {
@@ -120,6 +133,7 @@
     background-color: var(--mutedText);
     border-radius: 15px;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
+    color: var(--btnText);
   }
 }
 

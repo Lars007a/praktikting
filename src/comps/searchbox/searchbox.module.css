@@ -10,7 +10,9 @@
   padding: 25px 35px;
   /*   box-shadow: 0px 2px 4px rgba(0, 0, 0.3);
  */
-  border: 1px solid var(--secColor);
+  border: 1px solid var(--borderColor);
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);
+
   color: var(--textColor);
 
   display: flex;
@@ -58,10 +60,7 @@
   gap: 12px;
 }
 
-.searchBox input[type="text"],
 select {
-  background-color: var(--secColor);
-  color: var(--textColor);
   border: 0;
   outline: none;
   padding: 8px 12px;
@@ -72,50 +71,19 @@ select {
   font-size: 16px;
 }
 
-.searchBtn {
-  background-color: var(--accentColor);
-  color: var(--textColor);
-  padding: 8px 12px;
-  border: 0;
-  outline: none;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: background-color 0.2s;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0.3);
-}
-
-.searchBtn:hover {
-  background-color: var(--accentHover);
-}
-
 .searchBox select {
   appearance: none;
   cursor: pointer;
   background-color: var(--accentColor);
+  color: var(--btnText);
 }
 
 .searchBox select:hover {
   background-color: var(--accentHover);
 }
 
-.searchBox input::placeholder {
-  color: var(--textColor);
-}
-
 .searchBox option:disabled {
-  color: var(--mutedText);
-}
-
-.searchBox input[type="text"]:focus {
-  /*     border: 1px solid var(--accentColor);
- */
-  background-color: var(--mutedText);
-}
-
-@media (max-width: 1300px) {
-  .con {
-    width: 600px;
-  }
+  color: var(--btnText);
 }
 
 @media (max-width: 700px) {

@@ -56,14 +56,25 @@ export default function addComment({ postid, updateFunc }) {
         noValidate
         id="commentsection"
       >
-        <input type="email" placeholder="Email..." {...register("email")} />
-        <input type="text" placeholder="Navn..." {...register("name")} />
+        <input
+          type="email"
+          placeholder="Email..."
+          className="stdInput"
+          {...register("email")}
+        />
+        <input
+          type="text"
+          placeholder="Navn..."
+          className="stdInput"
+          {...register("name")}
+        />
         <textarea
           name=""
           placeholder="Kommentar..."
+          className="stdInput"
           {...register("text")}
         ></textarea>
-        <input type="submit" value={"Send kommentar"} />
+        <input type="submit" value={"Send kommentar"} className="stdInputBtn" />
       </form>
       <div className={styles.errorOutput}>
         {errors.email && <ErrorBox msg={errors.email.message} />}

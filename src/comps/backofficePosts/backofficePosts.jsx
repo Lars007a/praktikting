@@ -5,8 +5,12 @@ import AddPostForm from "../addPostForm/addPostForm.jsx";
 import { useState } from "react";
 import BackofficeEditPost from "../backofficeEditPost/backofficeEditPost.jsx";
 import BackofficeSeeComments from "../backofficeSeeComments/backofficeSeeComments.jsx";
+import { useSendData } from "../../hooks/usePosts.jsx";
+import { toast } from "react-toastify";
 
-export default function BackofficePosts({ data = [], changePage }) {
+export default function BackofficePosts({ data = [], updateFunc, changePage }) {
+  const sendData = useSendData();
+
   //Array for at holde på forkortede tekster, så at vi ikke bare har en 1000 ords streng i vores table.
   let shortenedText = [];
 
@@ -31,9 +35,25 @@ export default function BackofficePosts({ data = [], changePage }) {
   const [openSeeComments, setOpenSeeComments] = useState(false);
   const [openEditPost, setOpenEditPost] = useState(false);
 
+  const deletePost = (idToDel) => {
+    sendData
+      .deletePost(idToDel)
+      .then((val) => {
+        if (val.status == "ok") {
+          toast.success("Slettede indlæg!");
+          updateFunc();
+        } else {
+          throw new Error("Kunne ikke slette indlæg: " + val.message);
+        }
+      })
+      .catch((error) => {
+        toast.error(error.message);
+      });
+  };
+
   return (
     <>
-      <Title black={true} title={"Alle indlæg"} />
+      <Title black={false} title={"Alle indlæg"} />
       <button
         className={styles.btn}
         onClick={() => {
@@ -54,6 +74,7 @@ export default function BackofficePosts({ data = [], changePage }) {
               <th>category</th>
               <th>Kommentar</th>
               <th>Ændre</th>
+              <th>Slet</th>
             </tr>
           </thead>
           <tbody>
@@ -71,10 +92,7 @@ export default function BackofficePosts({ data = [], changePage }) {
                       <button
                         className={styles.btn}
                         onClick={() => {
-                          setOpenSeeComments({
-                            id: element._id,
-                            coms: element.comments,
-                          });
+                          setOpenSeeComments(element._id);
                         }}
                       >
                         Kommentar
@@ -90,6 +108,16 @@ export default function BackofficePosts({ data = [], changePage }) {
                         Ændre
                       </button>
                     </td>
+                    <td>
+                      <button
+                        className={styles.btn}
+                        onClick={() => {
+                          deletePost(element._id);
+                        }}
+                      >
+                        Slet
+                      </button>
+                    </td>
                   </tr>
                 );
               })}
@@ -99,9 +127,9 @@ export default function BackofficePosts({ data = [], changePage }) {
       {openAddPost ? (
         <BackofficePopup
           closeFunc={() => {
-            setOpenAddPost(false);
+            setOpenAddPost(null);
           }}
-          maincontent={<AddPostForm />}
+          maincontent={<AddPostForm updateFunc={updateFunc} />}
           colorClassTop={styles.colorchange}
           title={"Lav nyt indlæg"}
         />
@@ -112,10 +140,11 @@ export default function BackofficePosts({ data = [], changePage }) {
       {openEditPost ? (
         <BackofficePopup
           closeFunc={() => {
-            setOpenEditPost(false);
+            setOpenEditPost(null);
           }}
-          maincontent={<BackofficeEditPost obj={openEditPost} />}
-          colorClassTop={styles.colorchange}
+          maincontent={
+            <BackofficeEditPost obj={openEditPost} updateFunc={updateFunc} />
+          }
           title={`Ændre indlæg for ${openEditPost._id}`}
         />
       ) : (
@@ -125,11 +154,11 @@ export default function BackofficePosts({ data = [], changePage }) {
       {openSeeComments ? (
         <BackofficePopup
           closeFunc={() => {
-            setOpenSeeComments(false);
+            setOpenSeeComments(null);
           }}
-          maincontent={<BackofficeSeeComments coms={openSeeComments.coms} />}
+          maincontent={<BackofficeSeeComments post={openSeeComments} />}
           colorClassTop={styles.colorchange}
-          title={`Se komentarer for ${openSeeComments.id}`}
+          title={`Se komentarer for ${openSeeComments}`}
         />
       ) : (
         ""

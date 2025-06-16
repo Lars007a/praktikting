@@ -15,13 +15,19 @@ export default function backoffice() {
     if (postObj.data == null || postObj.data == undefined) return;
 
     setPageToShow(
-      <BackofficePosts data={postObj.data} changePage={setPageToShow} />
+      <BackofficePosts
+        data={postObj.data}
+        updateFunc={postObj.get}
+        changePage={setPageToShow}
+      />
     );
   }, [postObj.data]);
 
   return (
-    <div className="container">
-      <div className={styles.content}>{pageToShow}</div>
-    </div>
+    <section className={styles.page}>
+      <div className="container">
+        <div className={styles.content}>{pageToShow}</div>
+      </div>
+    </section>
   );
 }

@@ -5,35 +5,9 @@
   gap: 12px;
   margin-bottom: 12px;
 
-  input,
-  textarea {
-    padding: 12px 20px;
-    border-radius: 12px;
-    border: 1px solid transparent;
-    outline: none;
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
-    transition: background-color 0.2s, border 0.2s, color 0.2s;
-  }
-
   textarea {
     resize: vertical;
     height: 120px;
-  }
-
-  input[type="submit"] {
-    background-color: var(--accentColor);
-    color: var(--textColor);
-    cursor: pointer;
-  }
-
-  input[type="submit"]:hover {
-    background-color: var(--accentHover);
-  }
-
-  input[type="text"]:focus,
-  input[type="email"]:focus,
-  textarea:focus {
-    border: 1px solid var(--accentColor);
   }
 }
 
@@ -51,7 +25,7 @@
   }
 
   div p {
-    color: var(--textColor);
+    color: var(--btnText);
     text-align: center;
   }
 }

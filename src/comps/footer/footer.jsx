@@ -2,8 +2,9 @@ import styles from "./footer.module.css";
 import { IoMdMail } from "react-icons/io";
 import { FaPhone } from "react-icons/fa";
 import { FaHome } from "react-icons/fa";
+import { LuSunMoon } from "react-icons/lu";
 
-export default function footer() {
+export default function footer({ themeChanger }) {
   return (
     <>
       <footer className={styles.footer}>
@@ -15,16 +16,13 @@ export default function footer() {
                   <h3>Links</h3>
                 </li>
                 <li>
-                  <a href="#">Link</a>
+                  <a href="/">Blog</a>
                 </li>
                 <li>
-                  <a href="#">Link</a>
+                  <a href="/backoffice">Backoffice</a>
                 </li>
-                <li>
-                  <a href="#">Link</a>
-                </li>
-                <li>
-                  <a href="#">Link</a>
+                <li onClick={themeChanger}>
+                  <LuSunMoon />
                 </li>
               </ul>
               <ul className={styles.linkSec}>

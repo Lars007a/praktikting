@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useLocalStorage } from "@uidotdev/usehooks";
 
 //Kan blive brugt på /post, /posts, osv, osv.
 export function useGetData(url) {
@@ -41,6 +42,8 @@ export function useGetData(url) {
 
 //kan blive brugt på flere sider, bare et eventuelt url (efter host og port), og så data der skal sendes med.
 export function useSendData() {
+  const [loginToken, setLoginToken] = useLocalStorage("login", null);
+
   const addLike = (id) => {
     const res = fetch(`http://localhost:3043/incrementLike/${id}`, {
       method: "PATCH",
@@ -76,6 +79,9 @@ export function useSendData() {
   function addPost(form) {
     return fetch(`http://localhost:3043/posts/`, {
       method: "POST",
+      headers: {
+        authorization: loginToken,
+      },
       body: form,
     }).then((res) => {
       return res.json(); //return promsie med json value til næste.
@@ -85,17 +91,63 @@ export function useSendData() {
   function updatePost(form, postid) {
     return fetch(`http://localhost:3043/updatePost/${postid}`, {
       method: "PUT",
+      headers: {
+        authorization: loginToken,
+      },
       body: form,
     }).then((res) => {
       return res.json(); //return promsie med json value til næste.
     });
   }
 
-  function deleteComment(postid, commentid) {}
+  function deleteComment(postid, commentid) {
+    return fetch(`http://localhost:3043/deleteComment/${postid}/${commentid}`, {
+      method: "DELETE",
+      headers: {
+        authorization: loginToken,
+      },
+    }).then((res) => {
+      return res.json(); //return promsie med respons i json value  til næste.
+    });
+  }
 
-  function deletePost(id) {}
+  function deletePost(id) {
+    return fetch(`http://localhost:3043/post/${id}`, {
+      method: "DELETE",
+      headers: {
+        authorization: loginToken,
+      },
+    }).then((res) => {
+      return res.json(); //return promsie med json value til næste.
+    });
+  }
+
+  function login(email, password) {
+    return fetch(`http://localhost:3043/login`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: email,
+        password: password,
+      }),
+    }).then((res) => {
+      return res.json(); //return promsie med json value til næste.
+    });
+  }
 
   function sendRating(rating) {}
 
-  return { addLike, addComment, addPost, updatePost };
+  return {
+    addLike,
+    addComment,
+    addPost,
+    updatePost,
+    deletePost,
+    deleteComment,
+    sendRating,
+    removeLike,
+    login,
+  };
 }

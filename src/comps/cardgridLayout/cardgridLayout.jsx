@@ -19,6 +19,7 @@ export default function cardgrid() {
   const postPerPage = 10; //Hvor mange der skal vises på siden.
   const [currentPage, setCurrentPage] = useState(0); //Nuværende side.
 
+  //Når man klikker på at skifte side i bunden.
   const handleClick = ({ selected }) => {
     setCurrentPage(selected);
     window.scrollTo({ top: 0, behaviour: "smooth" });
@@ -26,6 +27,7 @@ export default function cardgrid() {
 
   useEffect(() => {
     //Sætter filteredarray, når postObj.data kommer ind, og bliver loadet.
+    //Så den som udgangspunkt er alt data.
     if (postObj.data) {
       setFilteredArray(postObj.data);
     }
@@ -40,7 +42,11 @@ export default function cardgrid() {
     <section className={styles.cardgrid}>
       <div className="container">
         <div className={styles.content}>
-          <Searchbox setData={setFilteredArray} allData={postObj.data} />
+          <Searchbox
+            setData={setFilteredArray}
+            changePage={setCurrentPage}
+            allData={postObj.data}
+          />
 
           <Title title={"Blog indlæg"} />
 

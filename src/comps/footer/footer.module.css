@@ -1,6 +1,6 @@
 .footer {
   background-color: var(--mainbc);
-  border-top: 1px solid var(--secColor);
+  border-top: 1px solid var(--borderColor);
   padding: 30px 0px;
 
   .content {
@@ -41,10 +41,23 @@
     gap: 12px;
   }
 
+  .linkSec svg {
+    color: var(--textColor);
+    transition: color 0.2s;
+    cursor: pointer;
+    height: 22px;
+    width: auto;
+  }
+
+  .linkSec svg:hover {
+    color: var(--accentColor);
+  }
+
   .linkSec span svg {
     color: var(--accentColor);
     height: 22px;
     width: auto;
+    cursor: default;
   }
 
   h3,
