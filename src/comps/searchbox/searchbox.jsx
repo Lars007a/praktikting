@@ -40,14 +40,6 @@ export default function searchbox({ setData, allData = [], changePage }) {
     const selectedEl = selectRef.current.value;
     const searchTerm = searchRef.current.value.toLowerCase().trimEnd();
     const orderEl = orderRef.current.value;
-
-    //Hvis værdierne i select inputs'ne er på default.
-    if (selectedEl == "choose" || orderEl == "default") {
-      //choose er default.
-      toast.error("Udfyld felterne!");
-      return;
-    }
-
     //tag filteredarray, og sæt den baseret på den fulde array,
     //og de elementer deri, der passer til søgekriterierne.
 

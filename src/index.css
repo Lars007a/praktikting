@@ -3,6 +3,7 @@
 :root {
   --accentColor: #9a3412;
   --accentHover: #7f2b0f;
+  --btnText: #e2e8f0;
 }
 
 body.dark {
@@ -12,7 +13,6 @@ body.dark {
   --secColor: #4b5563;
 
   --borderColor: #4b5563;
-  --btnText: #e2e8f0;
 
   /* toastify overrides */
   --toastify-color-light: var(--secColor);
@@ -26,9 +26,7 @@ body.light {
   --textColor: #1f2937;
   --mutedText: #64748b;
   --secColor: #f5f9ff;
-
   --borderColor: #ccc;
-  --btnText: #fafafa;
 
   /* toastify overrides */
   --toastify-color-light: var(--secColor);
