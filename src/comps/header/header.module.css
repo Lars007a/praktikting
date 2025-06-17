@@ -12,7 +12,7 @@
   height: 100%;
 }
 
-.slide div {
+.slide div:is(:not(.overlay)) {
   height: 100%;
   width: 100%;
   background-position: center center;
@@ -24,4 +24,18 @@
   justify-content: center;
   align-items: center;
   gap: 5px;
+
+  position: relative;
+}
+
+.slide div:is(.overlay) {
+  position: absolute; /* positioned til tættest positioned element, hvilket er slide diven, der er relativ, og har baggrunds billedet. */
+  inset: 0; /* top 0, bottom: 0, left: 0, right: 0, så fylder helder parrent ud. */
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1; /* så er foran billedet, men ikke teksten */
+}
+
+.slide h1 {
+  z-index: 2; /* så er foran overlayet. */
+  color: var(--textColor);
 }

@@ -13,6 +13,12 @@ body.dark {
 
   --borderColor: #4b5563;
   --btnText: #e2e8f0;
+
+  /* toastify overrides */
+  --toastify-color-light: var(--secColor);
+  --toastify-text-color-light: var(--textColor);
+  --toastify-color-dark: var(--secColor);
+  --toastify-text-color-dark: var(--textColor);
 }
 
 body.light {
@@ -23,6 +29,12 @@ body.light {
 
   --borderColor: #ccc;
   --btnText: #fafafa;
+
+  /* toastify overrides */
+  --toastify-color-light: var(--secColor);
+  --toastify-text-color-light: var(--textColor);
+  --toastify-color-dark: var(--secColor);
+  --toastify-text-color-dark: var(--textColor);
 }
 
 * {

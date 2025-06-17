@@ -3,7 +3,9 @@ import SingleComment from "../singleComment/singleComment.jsx";
 import Title from "../titleWithLine/titleWithLine.jsx";
 import AddComment from "../addComment/addComment.jsx";
 
-export default function commentGrid({ comments = [], postid, updateFunc }) {
+export default function commentGrid({ comments = [] }) {
+  //Layout for kommentarene, viser en titel, og looper over en array af kommentar, og viser hver kommentar i sit eget component.
+
   return (
     <>
       <div className={styles.title}>

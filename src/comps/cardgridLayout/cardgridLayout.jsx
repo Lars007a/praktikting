@@ -11,19 +11,22 @@ import { MdNavigateBefore } from "react-icons/md";
 import Searchbox from "../searchbox/searchbox.jsx";
 
 export default function cardgrid() {
-  const postObj = useGetData(`posts`);
+  const postObj = useGetData(`posts`); //Henter blog indlægene, fra endpointet /posts.
 
   //Arbejder ud fra denne, fordi eventuelle søgeresultater ville være i denne array.
-  const [filteredArray, setFilteredArray] = useState([]); //Array der holder alle dem der matcher filteret, såsom søgning, kategori, likes, osv, osv.
+  //Array der holder alle dem der matcher filteret/søgekriteriene,
+  //såsom søgeord, kategori, likes, osv, osv.
+  const [filteredArray, setFilteredArray] = useState([]);
 
   const postPerPage = 10; //Hvor mange der skal vises på siden.
-  const [currentPage, setCurrentPage] = useState(0); //Nuværende side.
+  const [currentPage, setCurrentPage] = useState(0); //Nuværende side der vises.
 
-  //Når man klikker på at skifte side i bunden.
+  //Når man klikker på at skifte side i bunden af siden.
+  //Bare ændre den nuværende side, og scroller til toppen med en smooth transition.
   const handleClick = ({ selected }) => {
     setCurrentPage(selected);
     window.scrollTo({ top: 0, behaviour: "smooth" });
-  }; //Bare ændre den nuværende side, og scroller til toppen med en smooth transition.
+  };
 
   useEffect(() => {
     //Sætter filteredarray, når postObj.data kommer ind, og bliver loadet.
@@ -33,20 +36,31 @@ export default function cardgrid() {
     }
   }, [postObj.data]);
 
+  //posts variable/array holder de elementer der vises på nuværende side, der bliver vist nu.
   const posts = filteredArray.slice(
-    currentPage * postPerPage, //få offset, 0 * 10 = 0, 1 * 10 = 10, 2 * 10 = 20,
-    (currentPage + 1) * postPerPage //få hvor meget den skal op til, så 0+1 * 10 = 10, 1+1 * 10 = 20, 1+2 * 10 = 30, 1+3 * 10 = 40.
-  ); //array, der holder dem der skal vises på den nuværende side.
+    //Tag dem der matcher søgekriterne og tag en del af arrayen.
+    //Fra:
+    currentPage * postPerPage, //den nuværende side * hvor mange der vises pr side, 0*10 = 0
+    (currentPage + 1) * postPerPage //den nuværende side + 1 * hvor mange der vises pr side. (0 + 1) * 10 = 10.
+  );
 
   return (
     <section className={styles.cardgrid}>
       <div className="container">
         <div className={styles.content}>
-          <Searchbox
-            setData={setFilteredArray}
-            changePage={setCurrentPage}
-            allData={postObj.data}
-          />
+          {/* element der filtrere filteredArray, og gør sådan
+          at den er baseret på brugerens søgekriterne.
+
+          Får funktionen til at sætte filteredarray, ændre siden (til at gå tilbage til side 1),
+           og alt data til at arbejde ud fra.
+          */}
+          {postObj.data && (
+            <Searchbox
+              setData={setFilteredArray}
+              changePage={setCurrentPage}
+              allData={postObj.data}
+            />
+          )}
 
           <Title title={"Blog indlæg"} />
 
@@ -81,9 +95,14 @@ export default function cardgrid() {
           </div>
           {
             <ReactPaginate
-              previousLabel={<MdNavigateBefore />}
-              nextLabel={<MdNavigateNext />}
-              pageCount={Math.ceil((filteredArray?.length || 0) / postPerPage)}
+              previousLabel={<MdNavigateBefore />} /* ikon til at skifte side */
+              nextLabel={<MdNavigateNext />} /* ikon til at skifte side */
+              pageCount={Math.ceil(
+                (filteredArray?.length || 0) / postPerPage
+              )} /* for at få hvor mange sider
+              der skal vises i bunden, rund op for arrayen der matcher søgekriterne, og dens længde
+              divideret med hvor mange posts der vises pr side.
+              */
               onPageChange={handleClick}
               containerClassName={styles.pagination}
               activeClassName={styles.active}

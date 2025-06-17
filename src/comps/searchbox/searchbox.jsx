@@ -4,51 +4,54 @@ import { useEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";
 
 export default function searchbox({ setData, allData = [], changePage }) {
-  const [categories, setCategories] = useState([]); //Alle kategorier der kan vælges immellem.
+  //State variable til at holde alle kategorierne der er indlæg med.
+  const [categories, setCategories] = useState([]);
 
+  //Når alt data kommer ind, så begynd at sætte kategorierne.
   useEffect(() => {
-    if (allData == undefined || allData == null) return; //Hvis vi ikke har dataene endnu.
-
     let tempArray = []; //Array til at holde på kategorierne midlertidligt.
-
+    //For hvert element i data arrayen, looper vi over kategori arrayen inde i,
+    //eftersom hvert element i data arrayen, her deres egen kategori array.
     for (let i = 0; i < allData.length; i++) {
-      //Loop over dataene vi har fået.
-      if (allData[i].category == null || allData[i].category == undefined)
-        continue; //Hvis vi ikke har en category, stop dette iteration af loppet, og gå videre til næste.
-
       for (let y = 0; y < allData[i].category.length; y++) {
-        //Hvis vi har category, så loop over alle elementer i category, (for hvert element i data arrayen.)
         if (tempArray.includes(allData[i].category[y])) {
-          //Hvis temparrayen allerede har denne kategori i sig, så gå videre til næste iteration af loopet.
-          continue;
+          continue; //Hvis vi allerede har tilføet denne kategori string, så gå videre til næste loop.
         }
-        tempArray.push(allData[i].category[y]); //Ellers så tilføj kategorien.
+        tempArray.push(allData[i].category[y]); //ellers så tilføj elementet.
       }
     }
-    //Kun opdater hvis den har ændrede sig.
+
+    //Opdater kategorierne der er gemt.
     setCategories((prev) => {
       if (JSON.stringify(prev) === JSON.stringify(tempArray)) return prev;
       return tempArray;
     });
   }, [allData]);
 
+  //Søgnings form.
   const selectRef = useRef(null);
   const searchRef = useRef(null);
   const orderRef = useRef(null);
 
   const submitForm = (event) => {
-    event.preventDefault();
+    event.preventDefault(); //Så vi kan ændre tingene selv.
+
+    //De tre værdier vi bruger, hvilken kategori, søgetermet, og rækkefølgen det skal sorteres i.
     const selectedEl = selectRef.current.value;
     const searchTerm = searchRef.current.value.toLowerCase().trimEnd();
     const orderEl = orderRef.current.value;
 
+    //Hvis værdierne i select inputs'ne er på default.
     if (selectedEl == "choose" || orderEl == "default") {
       //choose er default.
       toast.error("Udfyld felterne!");
       return;
     }
 
-    //tag filteredarray, og sæt den baseret på den fulde array, og de elementer deri, der passer til søgekriterierne.
+    //tag filteredarray, og sæt den baseret på den fulde array,
+    //og de elementer deri, der passer til søgekriterierne.
+
+    //Hvilket bliver gjort ved at lave en temparray, der så bliver filtreret, og derefter sorteret.
     const newArray = allData.filter((element, index) => {
       if (
         element.title.toLowerCase().includes(searchTerm) &&
@@ -69,6 +72,7 @@ export default function searchbox({ setData, allData = [], changePage }) {
     //Sort array ifølge søgekriterierne.
 
     if (orderEl == "alph") {
+      //alph for alfabetisk.
       newArray.sort((a, b) => {
         const titleA = a.title.toLowerCase();
         const titleB = b.title.toLowerCase();
@@ -100,7 +104,7 @@ export default function searchbox({ setData, allData = [], changePage }) {
 
     //Sæt arrayen til den state variable i parrent component.
     setData(newArray);
-    changePage(0);
+    changePage(0); //skifte side til den første side.
   };
 
   return (
@@ -122,6 +126,7 @@ export default function searchbox({ setData, allData = [], changePage }) {
                   Vælg kategori
                 </option>
                 <option value="all">Alle</option>
+                {/* I kategori select, loop over alle muligheder vi har fudnet, og vis dem. */}
                 {categories.map((element, index) => {
                   return (
                     <option value={`${element}`} key={index}>

@@ -3,6 +3,8 @@ import { useLocalStorage } from "@uidotdev/usehooks";
 
 //Kan blive brugt på /post, /posts, osv, osv.
 export function useGetData(url) {
+  const [loginToken, setLoginToken] = useLocalStorage("login", null); //Til at se om logget ind.
+
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -11,7 +13,11 @@ export function useGetData(url) {
     setLoading(true);
 
     try {
-      const resp = await fetch(`http://localhost:3043/${url}`);
+      const resp = await fetch(`http://localhost:3043/${url}`, {
+        headers: {
+          authorization: loginToken?.token ? loginToken.token : "",
+        },
+      });
 
       if (!resp.ok) {
         //checker status koden for en "ok" status kode.
@@ -42,25 +48,26 @@ export function useGetData(url) {
 
 //kan blive brugt på flere sider, bare et eventuelt url (efter host og port), og så data der skal sendes med.
 export function useSendData() {
-  const [loginToken, setLoginToken] = useLocalStorage("login", null);
+  const [loginToken, setLoginToken] = useLocalStorage("login", null); //Til at se om logget ind.
 
   const addLike = (id) => {
-    const res = fetch(`http://localhost:3043/incrementLike/${id}`, {
+    return fetch(`http://localhost:3043/incrementLike/${id}`, {
       method: "PATCH",
     }).then((res) => {
-      if (!res.ok) {
-        throw new Error("Respons ikke ok! Prøv igen!");
-      }
-
       return res.json();
     });
-
-    return res;
   };
 
-  function removeLike(id) {}
+  function removeLike(id) {
+    return fetch(`http://localhost:3043/decrementLike/${id}`, {
+      method: "PATCH",
+    }).then((res) => {
+      return res.json();
+    });
+  }
 
   function addComment(postid, email, name, text) {
+    //Retunere et promise, med value, der er formatteret som json.
     return fetch(`http://localhost:3043/addComment/${postid}`, {
       method: "POST",
       headers: {
@@ -76,11 +83,43 @@ export function useSendData() {
     });
   }
 
+  function addUser(email, name, password) {
+    //Retunere et promise, med value, der er formatteret som json.
+    return fetch(`http://localhost:3043/addUser`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        authorization: loginToken.token,
+      },
+      body: JSON.stringify({
+        email: email,
+        name: name,
+        password: password,
+      }),
+    }).then((res) => {
+      return res.json();
+    });
+  }
+
+  function deleteUser(id) {
+    //Retunere et promise, med value, der er formatteret som json.
+    return fetch(`http://localhost:3043/removeUser/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        authorization: loginToken.token,
+      },
+    }).then((res) => {
+      return res.json();
+    });
+  }
+
   function addPost(form) {
+    //Retunere et promise, med value, der er formatteret som json.
     return fetch(`http://localhost:3043/posts/`, {
       method: "POST",
       headers: {
-        authorization: loginToken,
+        authorization: loginToken.token,
       },
       body: form,
     }).then((res) => {
@@ -89,10 +128,11 @@ export function useSendData() {
   }
 
   function updatePost(form, postid) {
+    //Retunere et promise, med value, der er formatteret som json.
     return fetch(`http://localhost:3043/updatePost/${postid}`, {
       method: "PUT",
       headers: {
-        authorization: loginToken,
+        authorization: loginToken.token,
       },
       body: form,
     }).then((res) => {
@@ -101,10 +141,11 @@ export function useSendData() {
   }
 
   function deleteComment(postid, commentid) {
+    //Retunere et promise, med value, der er formatteret som json.
     return fetch(`http://localhost:3043/deleteComment/${postid}/${commentid}`, {
       method: "DELETE",
       headers: {
-        authorization: loginToken,
+        authorization: loginToken.token,
       },
     }).then((res) => {
       return res.json(); //return promsie med respons i json value  til næste.
@@ -112,10 +153,11 @@ export function useSendData() {
   }
 
   function deletePost(id) {
+    //Retunere et promise, med value, der er formatteret som json.
     return fetch(`http://localhost:3043/post/${id}`, {
       method: "DELETE",
       headers: {
-        authorization: loginToken,
+        authorization: loginToken.token,
       },
     }).then((res) => {
       return res.json(); //return promsie med json value til næste.
@@ -123,6 +165,7 @@ export function useSendData() {
   }
 
   function login(email, password) {
+    //Retunere et promise, med value, der er formatteret som json.
     return fetch(`http://localhost:3043/login`, {
       method: "POST",
       headers: {
@@ -149,5 +192,7 @@ export function useSendData() {
     sendRating,
     removeLike,
     login,
+    deleteUser,
+    addUser,
   };
 }

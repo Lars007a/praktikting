@@ -61,3 +61,16 @@
     cursor: pointer;
   }
 }
+
+@media (max-width: 700px) {
+  .nav {
+    padding-block: 15px;
+    h1 {
+      padding-block: 0px;
+    }
+    .content {
+      flex-direction: column;
+      gap: 10px;
+    }
+  }
+}

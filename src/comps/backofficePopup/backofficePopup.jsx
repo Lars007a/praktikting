@@ -5,6 +5,10 @@ import "reactjs-popup/dist/index.css";
 import { IoMdClose } from "react-icons/io";
 
 export default function backofficePopup({ closeFunc, maincontent, title }) {
+  //popup for backoffice.
+  //main content er det der skal vises, titel er titlen der bliver vist i toppen, og close funktion er
+  //den funktion der lukker popupen.
+
   return (
     <div className={styles.popup}>
       <div className={styles.modal}>

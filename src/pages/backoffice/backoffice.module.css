@@ -1,13 +1,59 @@
 .content {
   width: 100%;
 
-  padding: 30px 0px;
-
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
 
+.btns {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 12px;
+
+  @media (min-width: 700px) {
+    flex-direction: row;
+
+    button {
+      flex: 1;
+    }
+  }
+}
+
+.userInfo {
+  padding-block: 20px;
+  padding-inline: 30px;
+  border-radius: 20px;
+  margin-bottom: 30px;
+
+  width: 280px;
+  margin: 0 auto 30px auto;
+
+  color: var(--textColor);
+
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  border: 1px solid var(--borderColor);
+
+  > .group {
+    display: flex;
+    flex-direction: column;
+    gap: 0px;
+  }
+
+  > .group > strong {
+    font-weight: 600;
+  }
+
+  > .group > p {
+    font-weight: 300;
+  }
+}
+
 .page {
   background-color: var(--mainbc);
+  padding-block: 30px;
 }

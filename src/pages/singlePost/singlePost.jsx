@@ -35,20 +35,16 @@ export default function SinglePost() {
             {postObj.data && (
               <>
                 <Card
-                  obj={postObj?.data}
+                  obj={postObj.data}
                   fullPostPage={true}
-                  updateFunc={postObj?.get}
+                  updateFunc={postObj.get}
                   changeBcColor={false}
                 />
                 <AddComment
-                  postid={postObj?.data?._id}
-                  updateFunc={postObj?.get}
-                />
-                <CommentGrid
-                  comments={postObj?.data.comments}
                   postid={postObj.data._id}
-                  updateFunc={postObj?.get}
+                  updateFunc={postObj.get}
                 />
+                <CommentGrid comments={postObj.data.comments} />
               </>
             )}
           </div>

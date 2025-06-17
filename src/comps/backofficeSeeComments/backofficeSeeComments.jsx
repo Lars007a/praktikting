@@ -4,24 +4,28 @@ import { toast } from "react-toastify";
 import { useEffect, useState } from "react";
 
 export default function backofficeSeeComments({ post }) {
-  const useSend = useSendData();
-  const getData = useGetData(`post/${post}`);
+  const useSend = useSendData(); //Til at sende data til api'en.
+  const getData = useGetData(`post/${post}`); //get request til /post/:postid.
 
-  console.log(post);
+  const [coms, setComs] = useState([]); //kommentar der vises, default er en tom array.
 
-  const [coms, setComs] = useState([]);
   useEffect(() => {
+    //når vi får kommentarne fra api'en, så sætter vi state variablen der bliver vist til de kommentar
+    //der skal vises.
     if (getData.data == null || getData.data == undefined) return;
     setComs(getData.data.comments);
   }, [getData.data?.comments]);
 
+  //Funktion til at slette kommentar.
+  //skal bruge id på indlæg og kommentar.
   const delcomment = (postid, commentid) => {
     console.log(postid, commentid);
 
-    useSend
+    useSend //sender bare en request til api'en.
       .deleteComment(postid, commentid)
       .then((val) => {
         if (val.status == "ok") {
+          //Hvis success.
           toast.success("Kommentar fjernet!");
           getData.get();
         } else {

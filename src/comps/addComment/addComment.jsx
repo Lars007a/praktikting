@@ -9,7 +9,9 @@ import ErrorBox from "../errorBox/errorBox.jsx";
 import { useSendData } from "../../hooks/usePosts.jsx";
 
 export default function addComment({ postid, updateFunc }) {
-  const sendDataObj = useSendData();
+  //Komponent til formen for at tilføje en kommentar.
+
+  const sendDataObj = useSendData(); //hook med funktioner til at sende data til api'en.
 
   const schema = yup.object({
     email: yup
@@ -18,7 +20,7 @@ export default function addComment({ postid, updateFunc }) {
       .required("Skal skrive emailen ind..."),
     name: yup.string().required("Skal skrive et navn ind..."),
     text: yup.string().min(10, "Kommentaren skal minimum være på 10 tegn!"),
-  });
+  }); //schema.
 
   const {
     register,
@@ -27,15 +29,18 @@ export default function addComment({ postid, updateFunc }) {
   } = useForm({ resolver: yupResolver(schema) });
 
   const onSubmit = (data) => {
+    //når sender dataa.
     console.log(data);
     let d = sendDataObj
       .addComment(postid, data.email, data.name, data.text)
       .then((val) => {
         if (val.status == "ok") {
+          //hvis success
           toast.success("Kommentar tilføjet!");
           updateFunc();
         } else {
           console.log(val);
+          //Hvis fejl. sender bare fejl beskeden tilbage som fejl, der bliver "catchet senere, og sendt ud som besked".
           throw new Error(val.message);
         }
       })

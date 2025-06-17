@@ -1,0 +1,75 @@
+.page {
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.tablecon {
+  color: var(--textColor);
+  overflow-x: auto; /* nemmest med tables. */
+
+  table {
+    width: 100%;
+    border-collapse: collapse; /* så der ikke er et lille mellemrum */
+  }
+
+  table img {
+    height: 50px;
+    width: auto;
+    object-fit: cover;
+  }
+
+  table thead {
+    background-color: var(--secColor);
+    color: var(--textColor);
+  }
+
+  th,
+  td {
+    padding: 8px 5px;
+    text-align: left;
+  }
+
+  tbody th,
+  tbody td {
+    border: 1px solid var(--borderColor);
+  }
+
+  tbody svg {
+    height: 18px;
+    width: auto;
+    color: darkslategrey;
+    cursor: pointer;
+  }
+
+  tbody svg:hover {
+    color: rgb(7, 17, 17);
+  }
+
+  tbody tr:nth-child(even) {
+    background-color: transparent;
+  }
+}
+
+.btn {
+  cursor: pointer;
+  background-color: var(--accentColor);
+  color: var(--btnText);
+
+  border: 0;
+  outline: none;
+  border-radius: 8px;
+  text-align: center;
+  color: var(--btnText);
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
+  transition: background-color 0.2s;
+
+  padding: 8px 12px;
+}
+
+.btn:hover {
+  background-color: var(--accentHover);
+}

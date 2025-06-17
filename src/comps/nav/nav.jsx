@@ -8,6 +8,7 @@ export default function nav({ name, themeChanger }) {
   const [login, setLogin] = useLocalStorage("login", null);
 
   const logout = () => {
+    //Bare sætter login token tilbage til default værdi.
     setLogin(null);
   };
 

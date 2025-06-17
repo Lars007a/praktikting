@@ -1,19 +1,19 @@
 .footer {
   background-color: var(--mainbc);
-  border-top: 1px solid var(--borderColor);
   padding: 30px 0px;
 
+  border-top: 1px solid var(--borderColor);
+  border-bottom: 1px solid var(--borderColor);
   .content {
     width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-  }
 
-  .content div {
-    display: flex;
-    flex-direction: row;
-    gap: 30px;
+    @media (max-width: 800px) {
+      flex-direction: column;
+      gap: 20px;
+    }
   }
 
   .linkSec {
@@ -73,5 +73,17 @@
 
   h3 {
     font-size: 25px;
+  }
+}
+
+.copyrightNotice {
+  background-color: var(--mainbc);
+  padding-block: 15px;
+
+  p {
+    color: var(--textColor);
+    text-align: center;
+    padding-inline: 10px;
+    font-weight: 300;
   }
 }

@@ -4,7 +4,7 @@ import { useSendData } from "../../hooks/usePosts.jsx";
 import { toast } from "react-toastify";
 
 export default function backofficeEditPost({ obj, updateFunc }) {
-  const useSend = useSendData();
+  const useSend = useSendData(); //Send data til api'en hook.
 
   const formRef = useRef(null);
 
@@ -14,13 +14,15 @@ export default function backofficeEditPost({ obj, updateFunc }) {
 
     //Gør category fra string til array igen.
     const objOfData = Object.fromEntries(formData.entries()); //tager og konverter data inputtet til et object.
-    const categoryArray = objOfData.category.split(",");
-    formData.set("category", JSON.stringify(categoryArray));
+    const categoryArray = objOfData.category.split(","); //tager og konverter kategory til en array splittet på ",".
+    formData.set("category", JSON.stringify(categoryArray)); //sætter den nye kategory array, formatteret som JSON,
+    //  til det der skal sendes med formen
 
-    useSend
+    useSend //bruger funktionen returneret fra hook'et.
       .updatePost(formData, obj._id)
       .then((val) => {
         if (val.status == "ok") {
+          //hvis success.
           toast.success(val.message);
           updateFunc();
         } else {

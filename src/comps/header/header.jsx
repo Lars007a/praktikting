@@ -7,9 +7,9 @@ import "swiper/css/navigation";
 import { Navigation } from "swiper/modules";
 
 export default function header({
-  img = [standardpic],
-  frontpage = false,
-  title = "",
+  img = [standardpic], //default pic hvis ikke noget gives.
+  frontpage = false, //Hvis frontpage eller ikke.
+  title = "", //Titlen der vises på headeren.
 }) {
   return (
     <header className={styles.header}>
@@ -20,10 +20,12 @@ export default function header({
         modules={[Navigation]}
         className={styles.sliderWrapper}
       >
+        {/* looper over alle billeder i billed arrayen, og putter dem i en swiper slider */}
         {img.map((element, index) => {
           return (
             <SwiperSlide key={index} className={styles.slide}>
               <div style={{ backgroundImage: `url(${element})` }}>
+                <div className={styles.overlay}></div>
                 <h1>{title}</h1>
               </div>
             </SwiperSlide>

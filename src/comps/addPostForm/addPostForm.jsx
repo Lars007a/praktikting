@@ -4,12 +4,12 @@ import { useRef } from "react";
 import { toast } from "react-toastify";
 
 export default function addPostForm({ updateFunc }) {
-  const useSend = useSendData();
+  const useSend = useSendData(); //hook med funktioner til at sende data til api.
 
-  const formRef = useRef(null);
+  const formRef = useRef(null); //form med inputs.
 
   const submit = (event) => {
-    event.preventDefault();
+    event.preventDefault(); //så vi styre hvad der sker.
     const formData = new FormData(formRef.current); //Formdata, til at submitte.
 
     //Gør category fra string til array igen.
