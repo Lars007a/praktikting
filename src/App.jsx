@@ -48,7 +48,7 @@ export default function App() {
   return (
     <>
       <ToastContainer />
-      <Nav name={"Navns"} themeChanger={toggleTheme} />
+      <Nav name={"Hans'"} themeChanger={toggleTheme} />
       {routes}
       <Footer themeChanger={toggleTheme} />
     </>

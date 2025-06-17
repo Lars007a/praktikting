@@ -1,0 +1,60 @@
+.page {
+  background-color: var(--mainbc);
+  border-top: 1px solid var(--borderColor);
+  padding-block: 30px;
+
+  .content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    > .textSec {
+      text-align: center;
+      color: var(--textColor);
+
+      > h2 {
+        font-size: 25px;
+      }
+
+      > p {
+        font-size: 20px;
+        font-weight: 300;
+      }
+
+      > p > span {
+        color: var(--mutedText);
+        font-weight: 600;
+        font-style: italic;
+      }
+    }
+
+    > .ratingSec {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+
+      @media (max-width: 1000px) {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+    }
+
+    > .ratingSec > button {
+      border-radius: 20px;
+      flex: 1;
+    }
+
+    > .ratingSec > div:hover {
+      background-color: var(--accentHover);
+    }
+
+    > .ratingSec h3:hover {
+      color: var(--accentColor);
+    }
+  }
+}

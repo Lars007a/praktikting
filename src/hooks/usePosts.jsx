@@ -180,7 +180,20 @@ export function useSendData() {
     });
   }
 
-  function sendRating(rating) {}
+  function sendRating(rating) {
+    //Retunere et promise, med value, der er formatteret som json.
+    return fetch(`http://localhost:3043/sendRating`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        rating: rating,
+      }),
+    }).then((res) => {
+      return res.json(); //return promsie med json value til næste.
+    });
+  }
 
   return {
     addLike,

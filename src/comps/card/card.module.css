@@ -1,7 +1,7 @@
 .card {
   background-color: transparent;
   border-radius: 12px;
-  border: 1px solid var(--secColor);
+  border: 1px solid var(--borderColor);
   background-color: var(--mainbc);
   width: 100%;
 

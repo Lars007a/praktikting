@@ -39,10 +39,12 @@
     text-decoration: none;
     color: var(--textColor);
     transition: color 0.2s;
+    cursor: pointer;
   }
 
   ul a:hover,
-  ul svg:hover {
+  ul svg:hover,
+  ul li:hover {
     color: var(--accentColor);
   }
 

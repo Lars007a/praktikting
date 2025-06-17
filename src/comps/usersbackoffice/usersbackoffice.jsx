@@ -17,6 +17,7 @@ export default function usersbackoffice({}) {
       .then((val) => {
         if (val.status == "ok") {
           toast.success("Bruger slettet!");
+          useGet.get();
         } else {
           throw new Error(val.message);
         }

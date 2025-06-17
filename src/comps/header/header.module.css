@@ -37,5 +37,10 @@
 
 .slide h1 {
   z-index: 2; /* så er foran overlayet. */
-  color: var(--textColor);
+  color: var(--btnText);
+  text-align: center;
+  @media (max-width: 700px) {
+    width: 90%;
+    margin: 0 auto;
+  }
 }

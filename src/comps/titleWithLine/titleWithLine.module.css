@@ -9,16 +9,11 @@
 
 .title h2 {
   color: var(--textColor);
+  text-align: center;
 }
 
 .title .line {
   height: 1px;
   flex: 1;
   background-color: var(--borderColor);
-}
-
-.black {
-  h2 {
-    color: var(--mainbc);
-  }
 }
