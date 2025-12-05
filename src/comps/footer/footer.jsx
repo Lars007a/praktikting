@@ -6,7 +6,7 @@ import { LuSunMoon } from "react-icons/lu";
 
 export default function footer({ themeChanger }) {
   return (
-    <>
+    <div className={styles.footerSec}>
       <footer className={styles.footer}>
         <div className="container">
           <div className={styles.content}>
@@ -19,12 +19,6 @@ export default function footer({ themeChanger }) {
               </li>
               <li>
                 <a href="/backoffice">Backoffice</a>
-              </li>
-              <li onClick={themeChanger}>
-                <span>
-                  <LuSunMoon />
-                  <p>Tema</p>
-                </span>
               </li>
             </ul>
             <ul className={styles.linkSec}>
@@ -48,7 +42,7 @@ export default function footer({ themeChanger }) {
               <li>
                 <span>
                   <IoMdMail />
-                  <a href="mailto:mail@mail.dk">mail@mail.dk</a>
+                  <a href="mailto:laarrss@protonmail.com">laarrss@protonmail.com</a>
                 </span>
               </li>
               <li>
@@ -60,7 +54,7 @@ export default function footer({ themeChanger }) {
               <li>
                 <span>
                   <FaHome />
-                  <p>Addresse 1, by, 7500 Holstebro</p>
+                  <p>Klosterhaven 52, 8800 Viborg</p>
                 </span>
               </li>
             </ul>
@@ -70,6 +64,6 @@ export default function footer({ themeChanger }) {
       <section className={styles.copyrightNotice}>
         <p>© Copyright 2025</p>
       </section>
-    </>
+    </div>
   );
 }

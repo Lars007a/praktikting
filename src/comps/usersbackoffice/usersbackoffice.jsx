@@ -85,7 +85,7 @@ export default function usersbackoffice({}) {
               <th>id</th>
               <th>Email</th>
               <th>Navn</th>
-              <th>Hashed password</th>
+              <th>Role</th>
               <th>Slet</th>
             </tr>
           </thead>
@@ -97,7 +97,7 @@ export default function usersbackoffice({}) {
                     <td>{element._id}</td>
                     <td>{element.email}</td>
                     <td>{element.name}</td>
-                    <td>{element.password}</td>
+                    <td>{element.role}</td>
                     <td>
                       <button
                         className={styles.btn}

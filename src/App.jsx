@@ -8,7 +8,7 @@ import { ToastContainer } from "react-toastify";
 import Backoffice from "./pages/backoffice/backoffice.jsx";
 import { useLocalStorage } from "@uidotdev/usehooks";
 import Loginpage from "./pages/loginpage/loginpage.jsx";
-import LoginProtected from "./comps/loginprotected/loginprotected.jsx";
+import RequireAuth from "./comps/requireAuth/requireAuth.jsx";
 
 export default function App() {
   const routes = useRoutes([
@@ -23,34 +23,27 @@ export default function App() {
     {
       path: "/backoffice",
       element: (
-        <LoginProtected>
+        <RequireAuth>
           <Backoffice />
-        </LoginProtected>
+        </RequireAuth>
       ),
     },
     {
       path: "/login",
-      element: <Loginpage />,
+      element: <RequireAuth>
+        <Loginpage />
+        </RequireAuth>
     },
   ]);
-
-  const [theme, setTheme] = useLocalStorage("dark");
-
-  useEffect(() => {
-    document.body.classList.remove("dark", "light");
-    document.body.classList.add(theme);
-  }, [theme]);
-
-  const toggleTheme = () => {
-    setTheme((prev) => (prev == "dark" ? "light" : "dark"));
-  };
 
   return (
     <>
       <ToastContainer />
-      <Nav name={"Hans'"} themeChanger={toggleTheme} />
+      <Nav name={"Hans'"}/>
+      <main>
       {routes}
-      <Footer themeChanger={toggleTheme} />
+      </main>
+      <Footer/>
     </>
   );
 }

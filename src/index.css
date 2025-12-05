@@ -4,29 +4,12 @@
   --accentColor: #9a3412;
   --accentHover: #7f2b0f;
   --btnText: #e2e8f0;
-}
-
-body.dark {
   --mainbc: #1f2937;
   --textColor: #e2e8f0;
   --mutedText: #94a3b8;
   --secColor: #4b5563;
 
   --borderColor: #4b5563;
-
-  /* toastify overrides */
-  --toastify-color-light: var(--secColor);
-  --toastify-text-color-light: var(--textColor);
-  --toastify-color-dark: var(--secColor);
-  --toastify-text-color-dark: var(--textColor);
-}
-
-body.light {
-  --mainbc: #f8fafc;
-  --textColor: #1f2937;
-  --mutedText: #64748b;
-  --secColor: #f5f9ff;
-  --borderColor: #ccc;
 
   /* toastify overrides */
   --toastify-color-light: var(--secColor);
@@ -45,9 +28,19 @@ html {
   scroll-behavior: smooth;
 }
 
-body {
+#root {
   /*   background-color: var(--mainbc);
  */
+
+/*   display: grid;
+  grid-template-rows: auto auto 1fr auto auto;
+  min-height: 100vh;
+  width: 100%; */
+}
+
+main {
+  background-color: var(--mainbc);
+  min-height: 70vh;
 }
 
 html,

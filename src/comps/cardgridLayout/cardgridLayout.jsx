@@ -54,13 +54,13 @@ export default function cardgrid() {
           Får funktionen til at sætte filteredarray, ændre siden (til at gå tilbage til side 1),
            og alt data til at arbejde ud fra.
           */}
-          {postObj.data && (
             <Searchbox
               setData={setFilteredArray}
               changePage={setCurrentPage}
-              allData={postObj.data}
+              allData={postObj?.data}
             />
-          )}
+{/*           {postObj.data && (
+          )} */}
 
           <Title title={"Blog indlæg"} />
 
@@ -93,7 +93,7 @@ export default function cardgrid() {
               </>
             )}
           </div>
-          {
+          {postObj.data &&
             <ReactPaginate
               previousLabel={<MdNavigateBefore />} /* ikon til at skifte side */
               nextLabel={<MdNavigateNext />} /* ikon til at skifte side */

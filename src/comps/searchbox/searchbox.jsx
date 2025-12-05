@@ -9,6 +9,9 @@ export default function searchbox({ setData, allData = [], changePage }) {
 
   //Når alt data kommer ind, så begynd at sætte kategorierne.
   useEffect(() => {
+
+    if(allData == null || allData == undefined) return;
+
     let tempArray = []; //Array til at holde på kategorierne midlertidligt.
     //For hvert element i data arrayen, looper vi over kategori arrayen inde i,
     //eftersom hvert element i data arrayen, her deres egen kategori array.

@@ -50,6 +50,19 @@ export function useGetData(url) {
 export function useSendData() {
   const [loginToken, setLoginToken] = useLocalStorage("login", null); //Til at se om logget ind.
 
+
+  function validateToken() {
+    return fetch("http://localhost:3043/auth", {
+      method: "GET",
+      headers: {
+        authorization: loginToken?.token ? loginToken.token : "",
+        "Content-Type": "application/json",
+      }
+    }).then((res) => {
+      return res.json();
+    })
+  }
+
   const addLike = (id) => {
     return fetch(`http://localhost:3043/incrementLike/${id}`, {
       method: "PATCH",
@@ -207,5 +220,6 @@ export function useSendData() {
     login,
     deleteUser,
     addUser,
+    validateToken,
   };
 }

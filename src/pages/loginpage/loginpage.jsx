@@ -12,13 +12,6 @@ export default function loginpage() {
   const nav = useNavigate();
   const useSend = useSendData();
 
-  //Tjek om allerede logget ind.
-  useEffect(() => {
-    if (login != null || login != undefined) {
-      nav("/backoffice");
-    }
-  }, [login]);
-
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
 
@@ -53,7 +46,6 @@ export default function loginpage() {
           const user = jwtDecode(val.data);
 
           setLogin({ token: val.data, decoded: user }); //Sæt login localstorage til token vi har fået tilbage.
-          nav("/backoffice"); //navigere til backoffice side.
           return;
         } else {
           throw new Error(val.message); //Hvis fejl throw en fejl.

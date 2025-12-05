@@ -11,6 +11,11 @@
   color: var(--textColor);
   overflow-x: auto; /* nemmest med tables. */
 
+  td:has(button) {
+    display: grid;
+    place-content: center;
+  }
+
   table {
     width: 100%;
     border-collapse: collapse; /* så der ikke er et lille mellemrum */

@@ -46,7 +46,33 @@
 
     > .ratingSec > button {
       border-radius: 20px;
-      flex: 1;
+      padding-block: 15px;
+      padding-inline: 25px;
+      transition: filter 0.2s;
+
+      &:nth-child(1) {
+        background-color: #de1a24;
+      }
+
+      &:nth-child(2) {
+        background-color: #bf1029;
+      }
+
+      &:nth-child(3) {
+        background-color: #759116;
+      }
+
+      &:nth-child(4) {
+        background-color: #3f8f29;
+      }
+
+      &:nth-child(5) {
+        background-color: #00ab66;
+      }
+
+      &:hover {
+        filter:brightness(0.7);
+      }
     }
 
     > .ratingSec > div:hover {
