@@ -90,7 +90,7 @@ export default function Card({
     <article
       className={`${styles.card} ${
         changeBcColor ? styles.nottransparrent : ""
-      }`}
+      } ${fullPostPage ? styles.fullpostpage : ""}`}
     >
       {fullPostPage ? (
         ""

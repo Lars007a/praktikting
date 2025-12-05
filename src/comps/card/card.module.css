@@ -11,6 +11,14 @@
   grid-template-rows: 200px auto 1fr auto;
   row-gap: 15px;
 
+  &.fullpostpage {
+    grid-template-rows: auto 1fr auto;
+
+    .top {
+      padding-block-start: 15px;
+    }
+  }
+
   p,
   a,
   span,
@@ -47,7 +55,7 @@
   }
 
   .bottom {
-        padding-inline: 14px;
+        padding-inline: 18px;
         padding-block-end: 16px;
     display: flex;
     flex-direction: column;
@@ -56,7 +64,7 @@
   }
 
   .top {
-        padding-inline: 14px;
+        padding-inline: 18px;
     display: grid;
     grid-template-columns: auto auto;
   }
@@ -142,7 +150,7 @@
   }
 
   .textContent {
-    padding-inline: 14px;
+    padding-inline: 18px;
     display: flex;
     flex-direction: column;
     justify-content: center;

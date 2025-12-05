@@ -106,7 +106,7 @@ export default function searchbox({ setData, allData = [], changePage }) {
     <div className={styles.con}>
       <div className={styles.searchBox}>
         <Title title={"Søg"} />
-        <form onSubmit={submitForm}>
+        <form onSubmit={submitForm} onChange={submitForm}>
           <div className={styles.inputsform}>
             <input
               type="text"
