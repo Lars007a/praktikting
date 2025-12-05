@@ -5,7 +5,7 @@ import { useState } from "react";
 import { useLocalStorage } from "@uidotdev/usehooks";
 import { toast } from "react-toastify";
 
-export default function nav({ name, themeChanger }) {
+export default function nav({ }) {
   const [login, setLogin] = useLocalStorage("login", null);
   const nav = useNavigate();
 
@@ -21,7 +21,7 @@ export default function nav({ name, themeChanger }) {
         <div className="container">
           <div className={styles.content}>
             <NavLink to="/">
-              <h1 className="title">{name} blog</h1>
+              <h1 className="title">Rejseblog</h1>
             </NavLink>
             <ul>
               <NavLink to={"/"}>

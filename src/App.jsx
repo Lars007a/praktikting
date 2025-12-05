@@ -39,7 +39,7 @@ export default function App() {
   return (
     <>
       <ToastContainer />
-      <Nav name={"Hans'"}/>
+      <Nav/>
       <main>
       {routes}
       </main>

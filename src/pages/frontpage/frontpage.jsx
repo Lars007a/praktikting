@@ -7,7 +7,7 @@ export default function frontpage() {
   //Bare header og cardgrid'en.
   return (
     <>
-      <Header frontpage={true} title="Hans' Rejseblog" />
+      <Header frontpage={true} title="Rejseblog" />
       <CardgridLayout />
       <RatePage />
     </>
