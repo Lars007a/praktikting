@@ -13,7 +13,7 @@ export function useGetData(url) {
     setLoading(true);
 
     try {
-      const resp = await fetch(`http://localhost:3043/${url}`, {
+      const resp = await fetch(`https://praktikting-backend.onrender.com/${url}`, {
         headers: {
           authorization: loginToken?.token ? loginToken.token : "",
         },
@@ -52,7 +52,7 @@ export function useSendData() {
 
 
   function validateToken() {
-    return fetch("http://localhost:3043/auth", {
+    return fetch("https://praktikting-backend.onrender.com/auth", {
       method: "GET",
       headers: {
         authorization: loginToken?.token ? loginToken.token : "",
@@ -64,7 +64,7 @@ export function useSendData() {
   }
 
   const addLike = (id) => {
-    return fetch(`http://localhost:3043/incrementLike/${id}`, {
+    return fetch(`https://praktikting-backend.onrender.com/incrementLike/${id}`, {
       method: "PATCH",
     }).then((res) => {
       return res.json();
@@ -72,7 +72,7 @@ export function useSendData() {
   };
 
   function removeLike(id) {
-    return fetch(`http://localhost:3043/decrementLike/${id}`, {
+    return fetch(`https://praktikting-backend.onrender.com/decrementLike/${id}`, {
       method: "PATCH",
     }).then((res) => {
       return res.json();
@@ -81,7 +81,7 @@ export function useSendData() {
 
   function addComment(postid, email, name, text) {
     //Retunere et promise, med value, der er formatteret som json.
-    return fetch(`http://localhost:3043/addComment/${postid}`, {
+    return fetch(`https://praktikting-backend.onrender.com/addComment/${postid}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -98,7 +98,7 @@ export function useSendData() {
 
   function addUser(email, name, password) {
     //Retunere et promise, med value, der er formatteret som json.
-    return fetch(`http://localhost:3043/addUser`, {
+    return fetch(`https://praktikting-backend.onrender.com/addUser`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -116,7 +116,7 @@ export function useSendData() {
 
   function deleteUser(id) {
     //Retunere et promise, med value, der er formatteret som json.
-    return fetch(`http://localhost:3043/removeUser/${id}`, {
+    return fetch(`https://praktikting-backend.onrender.com/removeUser/${id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -129,7 +129,7 @@ export function useSendData() {
 
   function addPost(form) {
     //Retunere et promise, med value, der er formatteret som json.
-    return fetch(`http://localhost:3043/posts/`, {
+    return fetch(`https://praktikting-backend.onrender.com/posts/`, {
       method: "POST",
       headers: {
         authorization: loginToken.token,
@@ -142,7 +142,7 @@ export function useSendData() {
 
   function updatePost(form, postid) {
     //Retunere et promise, med value, der er formatteret som json.
-    return fetch(`http://localhost:3043/updatePost/${postid}`, {
+    return fetch(`https://praktikting-backend.onrender.com/updatePost/${postid}`, {
       method: "PUT",
       headers: {
         authorization: loginToken.token,
@@ -155,7 +155,7 @@ export function useSendData() {
 
   function deleteComment(postid, commentid) {
     //Retunere et promise, med value, der er formatteret som json.
-    return fetch(`http://localhost:3043/deleteComment/${postid}/${commentid}`, {
+    return fetch(`https://praktikting-backend.onrender.com/deleteComment/${postid}/${commentid}`, {
       method: "DELETE",
       headers: {
         authorization: loginToken.token,
@@ -167,7 +167,7 @@ export function useSendData() {
 
   function deletePost(id) {
     //Retunere et promise, med value, der er formatteret som json.
-    return fetch(`http://localhost:3043/post/${id}`, {
+    return fetch(`https://praktikting-backend.onrender.com/post/${id}`, {
       method: "DELETE",
       headers: {
         authorization: loginToken.token,
@@ -179,7 +179,7 @@ export function useSendData() {
 
   function login(email, password) {
     //Retunere et promise, med value, der er formatteret som json.
-    return fetch(`http://localhost:3043/login`, {
+    return fetch(`https://praktikting-backend.onrender.com/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -195,7 +195,7 @@ export function useSendData() {
 
   function sendRating(rating) {
     //Retunere et promise, med value, der er formatteret som json.
-    return fetch(`http://localhost:3043/sendRating`, {
+    return fetch(`https://praktikting-backend.onrender.com/sendRating`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
