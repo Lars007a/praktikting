@@ -5,6 +5,12 @@
   background-color: var(--mainbc);
   width: 100%;
 
+
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-rows: 200px auto 1fr auto;
+  row-gap: 15px;
+
   p,
   a,
   span,
@@ -40,33 +46,27 @@
     display: block;
   }
 
-  .slide {
-    width: 100% !important;
-    height: 200px !important;
-  }
-
-  .content {
+  .bottom {
+        padding-inline: 14px;
+        padding-block-end: 16px;
     display: flex;
     flex-direction: column;
     gap: 20px;
-    padding: 20px;
+    justify-content: flex-end;
   }
 
   .top {
-    display: flex;
-    flex-direction: row;
+        padding-inline: 14px;
+    display: grid;
+    grid-template-columns: auto auto;
   }
 
-  .top div {
-    flex: 1;
-  }
-
-  .top div h3 {
+  .top h3 {
     float: right;
     text-align: end;
   }
 
-  .top div:first-child h3 {
+  .top h3:first-child {
     float: left;
     text-align: start;
   }
@@ -116,6 +116,11 @@
   .btns a {
     background-color: red;
     color: var(--btnText);
+    transition: filter 0.2s;
+
+    &:hover {
+      filter: brightness(0.85);
+    }
   }
 
   .cat {
@@ -135,7 +140,16 @@
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
     color: var(--btnText);
   }
+
+  .textContent {
+    padding-inline: 14px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
 }
+
+
 
 .card.nottransparrent {
   background-color: var(--secColor);

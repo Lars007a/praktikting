@@ -115,16 +115,12 @@ export default function Card({
         </Swiper>
       )}
 
-      <div className={styles.content}>
         <div className={styles.top}>
-          <div>
             <h3>{obj.title}</h3>
-          </div>
-          <div>
             <h3>{dateToShow}</h3>
-          </div>
         </div>
 
+      <div className={styles.textContent}>
         <p>
           {textToShow}
           {!fullPostPage ? (
@@ -136,6 +132,9 @@ export default function Card({
             ""
           )}
         </p>
+      </div>
+
+        <div className={styles.bottom}>
 
         <div className={styles.btns}>
           <button onClick={likefn}>

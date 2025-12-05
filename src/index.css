@@ -154,3 +154,8 @@ div.swiper-button-next:hover {
     background-color: var(--accentHover);
   }
 }
+
+
+.swiper {
+  width: 100%;
+}
