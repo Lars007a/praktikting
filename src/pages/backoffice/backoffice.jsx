@@ -12,10 +12,22 @@ import Usersbackoffice from "../../comps/usersbackoffice/usersbackoffice.jsx";
 export default function backoffice() {
   const [pageToShow, setPageToShow] = useState();
   const [login, setLogin] = useLocalStorage("login", null);
+  const [decodedUser, setDecodedUser] = useState({});
 
   useEffect(() => {
     setPageToShow(<BackofficePosts />);
   }, []);
+
+
+  useEffect(() => {
+    
+    if(!login?.token) return;
+    
+    const user = jwtDecode(login.token);
+  
+    setDecodedUser(user);
+
+  }, [login?.token])
 
   return (
     <section className={styles.page}>
@@ -23,15 +35,15 @@ export default function backoffice() {
         <div className={styles.userInfo}>
           <div className={styles.group}>
             <strong>Name</strong>
-            <p>{login?.decoded?.name}</p>
+            <p>{decodedUser?.name}</p>
           </div>
           <div className={styles.group}>
             <strong>Email</strong>
-            <p>{login?.decoded?.email}</p>
+            <p>{decodedUser?.email}</p>
           </div>
           <div className={styles.group}>
             <strong>user ID</strong>
-            <p>{login?.decoded?._id}</p>
+            <p>{decodedUser?._id}</p>
           </div>
         </div>
         <div className={styles.btns}>

@@ -43,9 +43,7 @@ export default function loginpage() {
         if (val.status == "ok") {
           toast.success("Logget ind!");
 
-          const user = jwtDecode(val.data);
-
-          setLogin({ token: val.data, decoded: user }); //Sæt login localstorage til token vi har fået tilbage.
+          setLogin({ token: val.data}); //Sæt login localstorage til token vi har fået tilbage.
           return;
         } else {
           throw new Error(val.message); //Hvis fejl throw en fejl.

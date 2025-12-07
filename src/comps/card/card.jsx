@@ -107,7 +107,6 @@ export default function Card({
               <SwiperSlide key={index} className={styles.slide}>
                 <div className={styles.postimg}>
                   <img src={element} alt="post img" />
-                  {console.log(element)}
                 </div>
               </SwiperSlide>
             );
