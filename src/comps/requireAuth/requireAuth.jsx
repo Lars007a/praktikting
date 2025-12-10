@@ -5,7 +5,7 @@ import { useSendData } from "../../hooks/usePosts.jsx";
 import { toast } from "react-toastify";
 import { Navigate } from "react-router";
 import LoadingSpinner from "../loadingSpinner/loadingSpinner.jsx";
-import styles from "./loaderCon.module.css";
+import styles from "./loadercon.module.css";
 
 export default function RequireAuth({ children }) {
   //Beskytter backoffice siden, mod dem der ikke har en token sat.
